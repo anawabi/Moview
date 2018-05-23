@@ -1,5 +1,6 @@
 package com.amannawabi.moview;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private static final String TAG = "MovieMainActivity";
-    static List<Movies> mMovieList =  new ArrayList<>();
+    static List<Movies> mMovieList = new ArrayList<>();
     private URL url;
     private Toast mToast;
 
@@ -41,16 +44,20 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Started");
         recyclerView = findViewById(R.id.movies_rv);
+        createRecycler("popular");
+    }
 
+    private void createRecycler(String sortBy) {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        url = NetworkUtils.buildURL("popular");
+        url = NetworkUtils.buildURL(sortBy);
         Log.d(TAG, "onCreate: URL Generated" + url);
         new movieQuery().execute(url);
-        mAdapter = new MovieAdapter(mMovieList, this);
-        Log.d(TAG, "onCreate: " + mMovieList.size());
-        recyclerView.setAdapter(mAdapter);
+//        mAdapter.notifyDataSetChanged();
+//        mAdapter = new MovieAdapter(mMovieList, this);
+//        Log.d(TAG, "onCreate: " + mMovieList.size());
+//        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -61,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         if (mToast != null) {
             mToast.cancel();
         }
-        String toastMessage = "You Clicked " +mMovieList.get(0).getMovieTitle();
+        String toastMessage = "You Clicked " + mMovieList.get(0).getMovieTitle();
         mToast = Toast.makeText(this, toastMessage, Toast.LENGTH_LONG);
 //
 //
@@ -69,7 +76,30 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
 //        mToast.show();
     }
 
-    public static class movieQuery extends AsyncTask<URL, Void, List<Movies>> {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int selectedItem = item.getItemId();
+        if (selectedItem == R.id.sort_by_popular) {
+            createRecycler("popular");
+            Context context = MainActivity.this;
+            String sSelectedItem = "Sort by Popular selected";
+            Toast.makeText(context, sSelectedItem, Toast.LENGTH_SHORT).show();
+        } else if (selectedItem == R.id.sort_by_top_rated) {
+            createRecycler("top_rated");
+            Context context = MainActivity.this;
+            String sSelectedItem = "Sort by Top Rated selected";
+            Toast.makeText(context, sSelectedItem, Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public class movieQuery extends AsyncTask<URL, Void, List<Movies>> {
 
         @Override
         protected void onPreExecute() {
@@ -88,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
 //                Log.d(TAG, "doInBackground: " +jSonData);
 
                 mMovielist = JsonUtils.parseMovieJson(jSonData);
-                Log.d(TAG, "doInBackground: " +mMovielist.size());
+                Log.d(TAG, "doInBackground: " + mMovielist.size());
 
 //                return mMovielist;
 
@@ -102,7 +132,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
         protected void onPostExecute(List<Movies> movies) {
             super.onPostExecute(movies);
             mMovieList = movies;
-            Log.d(TAG, "onPostExecute: " +mMovieList.size());
+//            mAdapter.notifyDataSetChanged();
+            mAdapter = new MovieAdapter(mMovieList, MainActivity.this);
+            Log.d(TAG, "onCreate: " + mMovieList.size());
+            recyclerView.setAdapter(mAdapter);
+            Log.d(TAG, "onPostExecute: " + mMovieList.size());
 
         }
     }

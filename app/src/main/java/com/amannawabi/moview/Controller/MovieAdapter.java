@@ -32,6 +32,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.movieViewHol
     public MovieAdapter(List<Movies> movies, ListItemClickListener listener){
         mMovies = movies;
         mOnClickListener = listener;
+        this.notifyDataSetChanged();
     }
 
     @NonNull

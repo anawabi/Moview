@@ -31,9 +31,6 @@ public class JsonUtils {
 
                 mMoviesList.add(movies);
             }
-
-
-
         } catch (JSONException e){
 
             e.printStackTrace();

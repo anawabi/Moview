@@ -10,7 +10,7 @@
         android:id="@+id/movie_poster"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-
+android:foregroundGravity="fill"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,26 +19,27 @@
         android:id="@+id/movie_title_caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Title:"
-        app:layout_constraintEnd_toStartOf="@+id/movie_title"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_poster" />
 
     <TextView
         android:id="@+id/movie_title"
-        android:layout_width="266dp"
+        android:layout_width="305dp"
         android:layout_height="16dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Movie Title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/movie_title_caption"
         app:layout_constraintTop_toBottomOf="@+id/movie_poster" />
 
     <TextView
@@ -49,6 +50,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Rating:"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_title_caption" />
 
@@ -71,26 +73,26 @@
         android:id="@+id/movie_release_date_caption"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Released:"
-        app:layout_constraintEnd_toStartOf="@+id/movie_release_date"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/movie_rating_caption" />
 
     <TextView
         android:id="@+id/movie_release_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="168dp"
-        android:layout_marginRight="168dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="123dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="169dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="169dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="7dp"
         android:text="Movie Release Date"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/movie_release_date_caption"
         app:layout_constraintTop_toBottomOf="@+id/movie_rating" />
 
     <TextView
@@ -103,10 +105,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Overview:"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movie_release_date" />
+        app:layout_constraintTop_toBottomOf="@+id/movie_release_date_caption" />
 
     <TextView
         android:id="@+id/movie_overview"
@@ -117,7 +120,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="30dp"
         android:text="Movie Overview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

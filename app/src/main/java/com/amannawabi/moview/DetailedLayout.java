@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 public class DetailedLayout extends AppCompatActivity {
     TextView mMovieTitle, mMovieRating, mMovieOverview, mMovieRelaeaseDate;
     ImageView mMoviePoster;
-    String sMovieTitle, sMovieRating, sMovieOverview, sMovieReleaseDate;
+    String sMovieRating;
     double iMovieRating;
 
     private static final String POSTER_PATH = "http://image.tmdb.org/t/p/w185//";

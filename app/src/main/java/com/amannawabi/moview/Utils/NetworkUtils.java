@@ -18,7 +18,7 @@ public class NetworkUtils {
     final static String PARAM_SORT = "popular";
     final static String sortBy = "popular";
     final static String PARAM_API_KEY = "api_key";
-    final static String API_KEY = "Add your API Key here";
+    final static String API_KEY = "";
     private static final String TAG = "MovieNetworkUtils";
     public static URL buildURL(String sortBy) {
         Uri buildUri = Uri.parse(BASE_URL).buildUpon()
