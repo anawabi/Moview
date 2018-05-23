@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
     private RecyclerView.Adapter mAdapter;
     private static final String TAG = "MovieMainActivity";
     static List<Movies> mMovieList =  new ArrayList<>();
-    URL url;
+    private URL url;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +55,14 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.List
 
     @Override
     public void onListItemClick(int clickedItemIndex) {
-//        Intent intent = new Intent(MainActivity.this, DetailedLayout.class);
-//        intent.putExtra("Detail Layout", mMoviesList.get(clickedItemIndex));
-//        startActivity(intent);
-//        if (mToast != null) {
-//            mToast.cancel();
-//        }
-//        String toastMessage = "You Clicked " +mMoviesList.get(0).getMovieTitle();
-//        mToast = Toast.makeText(this, toastMessage, Toast.LENGTH_LONG);
+        Intent intent = new Intent(MainActivity.this, DetailedLayout.class);
+        intent.putExtra("Detail Layout", mMovieList.get(clickedItemIndex));
+        startActivity(intent);
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        String toastMessage = "You Clicked " +mMovieList.get(0).getMovieTitle();
+        mToast = Toast.makeText(this, toastMessage, Toast.LENGTH_LONG);
 //
 //
 //
