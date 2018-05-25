@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ */
+
 package com.amannawabi.moview;
 
 import android.content.Intent;
@@ -11,12 +15,12 @@ import com.squareup.picasso.Picasso;
 
 
 public class DetailedLayout extends AppCompatActivity {
-    TextView mMovieTitle, mMovieRating, mMovieOverview, mMovieRelaeaseDate;
-    ImageView mMoviePoster;
-    String sMovieRating;
-    double iMovieRating;
+    private TextView mMovieTitle, mMovieRating, mMovieOverview, mMovieReleaseDate;
+    private ImageView mMoviePoster;
+    private String iMovieRating;
 
-    private static final String POSTER_PATH = "http://image.tmdb.org/t/p/w185//";
+
+    private static final String POSTER_PATH = "http://image.tmdb.org/t/p/w780//";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,19 +29,23 @@ public class DetailedLayout extends AppCompatActivity {
         mMoviePoster = findViewById(R.id.movie_poster);
         mMovieRating = findViewById(R.id.movie_rating);
         mMovieOverview = findViewById(R.id.movie_overview);
-        mMovieRelaeaseDate = findViewById(R.id.movie_release_date);
+        mMovieReleaseDate = findViewById(R.id.movie_release_date);
         createDetailLayout();
 
     }
+
+    /**
+     * Sets the movie data into UI components in Detail Activity
+     */
     private void createDetailLayout(){
+        final String RATING = "/10";
         Intent intent = getIntent();
         Movies movies = intent.getParcelableExtra("Detail Layout");
         iMovieRating = movies.getRatings();
-        sMovieRating = (Double.toString(iMovieRating) +"/10");
         mMovieTitle.setText(movies.getMovieTitle());
         Picasso.get().load(POSTER_PATH + movies.getMoviePoster()).into(mMoviePoster);
-        mMovieRating.setText(sMovieRating);
-        mMovieRelaeaseDate.setText(movies.getReleaseDate().substring(0,4));
+        mMovieRating.setText(iMovieRating + RATING);
+        mMovieReleaseDate.setText(movies.getReleaseDate().substring(0,4));
         mMovieOverview.setText(movies.getMovieOverView());
 
 

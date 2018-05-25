@@ -1,9 +1,10 @@
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ */
+
 package com.amannawabi.moview.Utils;
 
-import android.graphics.Movie;
-
 import com.amannawabi.moview.Model.Movies;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,9 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonUtils {
+
+    /**
+     * Gets the data as String and parse it to JSON, stores it in Array list and return it
+     *
+     */
     public static List<Movies> parseMovieJson(String json){
 
-        Movies movies = new Movies();
+        Movies movies;
         List<Movies> mMoviesList = new ArrayList<>();
         try{
             JSONObject response = new JSONObject(json);
@@ -26,7 +32,7 @@ public class JsonUtils {
                         obj.getString("title"),
                         obj.getString("poster_path"),
                         obj.getString("overview"),
-                        obj.getInt("vote_average"),
+                        obj.getString("vote_average"),
                         obj.getString("release_date"));
 
                 mMoviesList.add(movies);

@@ -1,17 +1,26 @@
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ */
+
 package com.amannawabi.moview.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Generates Data Model class and sets the setter and getter methods and send the data by implementing
+ * parcelable interface
+ */
 public class Movies implements Parcelable{
 
     private int mMovieId;
     private String mMovieTitle;
     private String mMoviePoster;
     private String mMovieOverView;
-    private double mRatings;
+    private String mRatings;
     private String mReleaseDate;
-    public Movies(int mMovieId, String movieTitle, String moviePoster, String movieOverView, double ratings, String releaseDate) {
+
+    public Movies(int mMovieId, String movieTitle, String moviePoster, String movieOverView, String ratings, String releaseDate) {
         this.mMovieId = mMovieId;
         this.mMovieTitle = movieTitle;
         this.mMoviePoster = moviePoster;
@@ -25,7 +34,7 @@ public class Movies implements Parcelable{
         mMovieTitle = in.readString();
         mMoviePoster = in.readString();
         mMovieOverView = in.readString();
-        mRatings = in.readDouble();
+        mRatings = in.readString();
         mReleaseDate = in.readString();
     }
 
@@ -51,7 +60,7 @@ public class Movies implements Parcelable{
         dest.writeString(mMovieTitle);
         dest.writeString(mMoviePoster);
         dest.writeString(mMovieOverView);
-        dest.writeDouble(mRatings);
+        dest.writeString(mRatings);
         dest.writeString(mReleaseDate);
     }
 
@@ -92,11 +101,11 @@ public class Movies implements Parcelable{
         this.mMovieOverView = movieOverView;
     }
 
-    public double getRatings() {
+    public String getRatings() {
         return mRatings;
     }
 
-    public void setRatings(double ratings) {
+    public void setRatings(String ratings) {
         this.mRatings = ratings;
     }
 
