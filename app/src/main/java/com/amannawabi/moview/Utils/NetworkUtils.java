@@ -5,9 +5,13 @@
 package com.amannawabi.moview.Utils;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.util.Log;
 
+
+import com.amannawabi.moview.BuildConfig;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +23,7 @@ import java.net.URL;
 public class NetworkUtils {
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie";
     private final static String PARAM_API_KEY = "api_key";
-    private final static String API_KEY = "Insert your MovieDB API Key here";
+    private static final String API_KEY = BuildConfig.API_KEY;
     private static final String TAG = "MovieNetworkUtils";
 
     /**
@@ -67,6 +71,12 @@ public class NetworkUtils {
         } finally {
             urlConnection.disconnect();
         }
+    }
+
+    public static boolean isNetworkConnected(Context context){
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
 
