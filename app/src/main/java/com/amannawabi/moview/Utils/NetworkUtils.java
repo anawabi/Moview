@@ -22,9 +22,12 @@ import java.net.URL;
 
 public class NetworkUtils {
     private final static String BASE_URL = "http://api.themoviedb.org/3/movie";
+    private final static String YOUTUBE_URL = " https://www.youtube.com/watch";
+    private final static String PARAM_V = "v";
     private final static String PARAM_API_KEY = "api_key";
     private static final String API_KEY = BuildConfig.API_KEY;
     private static final String TAG = "MovieNetworkUtils";
+    private static final String VIDEO = "videos";
 
     /**
      * Generates the URL by receiving the string and appending the path and Query parameters and return the URL
@@ -44,6 +47,33 @@ public class NetworkUtils {
         return Url;
     }
 
+    public static URL buildTrailerURL(String mMovieID) {
+        Uri buildUri = Uri.parse(BASE_URL).buildUpon()
+                .appendPath(mMovieID)
+                .appendPath(VIDEO)
+                .appendQueryParameter(PARAM_API_KEY, API_KEY).build();
+
+        URL Url = null;
+        try {
+            Url = new URL(buildUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return Url;
+    }
+
+    public static URL buildTrailerVideoURL(String mMovieKey) {
+        Uri buildUri = Uri.parse(YOUTUBE_URL).buildUpon()
+                .appendQueryParameter(PARAM_V, mMovieKey).build();
+
+        URL Url = null;
+        try {
+            Url = new URL(buildUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return Url;
+    }
     /**
      * Establishes HTTP connection with server, opens the connection, buffers the data from server
      * and returns as string and close the connection
@@ -64,7 +94,7 @@ public class NetworkUtils {
                         sb.append(line);
                     }
                     br.close();
-                    Log.d(TAG, "getResponseFromHttpUrl: " + sb);
+//                    Log.d(TAG, "getResponseFromHttpUrl: " + sb);
                     return sb.toString();
             }
             return null;

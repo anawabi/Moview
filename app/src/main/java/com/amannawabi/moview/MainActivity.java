@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements onTaskCompleted, 
     private static final String TAG = "MovieMainActivity";
     private static List<Movies> mMovieList = new ArrayList<>();
     private URL url;
+//    private Bundle mRecyclerViewState;
+//    public static final String LIST_STATE_KEY = "List_State_Key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +48,20 @@ public class MainActivity extends AppCompatActivity implements onTaskCompleted, 
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Started");
         recyclerView = findViewById(R.id.movies_rv);
+//        if(savedInstanceState !=null){
+////            mRecyclerViewState = savedInstanceState.get;
+//        }
         createRecycler("popular");
+        Log.d(TAG, "onCreate: Saved Instance " + savedInstanceState);
 
     }
+
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//
+//
+//    }
 
     /**
      * Generates URL by sending the sort order parameter to Network Utils buildURL method and generates
@@ -80,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements onTaskCompleted, 
         recyclerView.setAdapter(mAdapter);
         Log.d(TAG, "onPostExecute: " + mMovieList.size());
     }
+
+
 
     /**
      * Opens Detail Activity once the movie poster is clicked.

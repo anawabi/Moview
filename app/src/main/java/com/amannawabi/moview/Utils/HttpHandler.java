@@ -1,6 +1,6 @@
 package com.amannawabi.moview.Utils;
 
-import android.content.Context;
+
 import android.os.AsyncTask;
 
 import android.util.Log;
@@ -41,6 +41,7 @@ public class HttpHandler extends AsyncTask<URL, Void, List<Movies>> {
     @Override
     protected List<Movies> doInBackground(URL... urls) {
         URL url = urls[0];
+      
         String jSonData;
 
         List<Movies> mMovielist = new ArrayList<>();
